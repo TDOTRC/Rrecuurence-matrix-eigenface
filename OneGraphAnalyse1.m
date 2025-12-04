@@ -1,4 +1,7 @@
 %% cauculate the PCA based on one matrix
+Size=2000;
+Col=15;
+Vol=45;
 traitVec=zeros(Size,Vol*9);
 %% lorentz stability under approach 2
 data4=load("E:\研究生\论文1\论文1\数据\lor距离\data4.mat");
@@ -261,6 +264,7 @@ distance=zeros(Size,Size,Vol);
 pca=zeros(Size,Col,Vol);
 t=[0.01:0.01:20];
 z=zeros(Vol,Size);
+Rand=randn(Size,1);
 for i=1:Vol
 z(i,:)=data3(1:3:3*Size,3*(i-1)+1);
 end
