@@ -1,0 +1,94 @@
+function [RR, DET, L, ENT, TREND] = simple_RQA(matrix, min_diag_length)
+% 简化版RQA分析函数
+% 输入：
+%   matrix : N×N 实对称二值化方阵（元素为0或1）
+%   min_diag_length : 最短斜向线长度（默认2）
+% 输出：
+%   RR    : 递归率
+%   DET   : 确定性
+%   L     : 平均对角线长度
+%   ENT   : 轨迹熵
+%   TREND : 趋势
+
+%% 参数检查
+if nargin < 2
+    min_diag_length = 2; % 默认最短对角线长度
+end
+
+% 检查矩阵是否为方阵
+[N, M] = size(matrix);
+if N ~= M
+    error('输入矩阵必须是方阵');
+end
+
+% 检查是否为二值矩阵
+if ~all(ismember(matrix(:), [0, 1]))
+    warning('输入矩阵不是严格的二值矩阵，将进行二值化处理');
+    matrix = matrix > 0.5;
+end
+
+%% 1. 计算递归率 RR
+RR = sum(matrix(:)) / (N^2);
+
+%% 2. 提取所有对角线长度
+diag_lengths = [];
+for k = -(N-1):(N-1)
+    diag_line = [0,diag(matrix, k),0];
+    for j=1:length(diag_lengths)-2
+        for i=2:length(diag_lengths)-j
+            if prod(diag_line(i:i+j-1))
+            end
+        end
+    end
+end
+
+%% 3. 计算确定性 DET
+% 满足最小长度的对角线
+long_diags = diag_lengths(diag_lengths >= min_diag_length);
+
+if ~isempty(diag_lengths)
+    DET = sum(long_diags) / sum(diag_lengths);
+else
+    DET = 0;
+end
+
+%% 4. 计算平均对角线长度 L
+if ~isempty(long_diags)
+    L = mean(long_diags);
+else
+    L = 0;
+end
+
+%% 5. 计算轨迹熵 ENT
+if ~isempty(long_diags)
+    % 统计每种长度的频次
+    unique_lengths = unique(long_diags);
+    counts = histcounts(long_diags, [unique_lengths; max(unique_lengths)+1]);
+    probabilities = counts / sum(counts);
+    
+    % 计算香农熵
+    ENT = -sum(probabilities .* log2(probabilities + eps));
+else
+    ENT = 0;
+end
+
+%% 6. 计算趋势 TREND
+% 创建距离权重矩阵
+[X, Y] = meshgrid(1:N, 1:N);
+distance = abs(X - Y);
+
+% 获取所有递归点的距离
+rec_points = find(matrix == 1);
+rec_distances = distance(rec_points);
+
+if ~isempty(rec_distances)
+    % 时间序列（递归点出现的顺序）
+    time_sequence = 1:length(rec_distances);
+    
+    % 线性拟合斜率
+    p = polyfit(time_sequence', rec_distances, 1);
+    TREND = p(1) / mean(rec_distances); % 归一化趋势
+else
+    TREND = 0;
+end
+end
