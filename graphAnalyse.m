@@ -221,11 +221,11 @@ hold on
 plot([1:12],relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
 legend('MATCHINGINDEX','TRANSIVITY','GLOBALEFFICIENCY','MEANCLUSTER')
 title('CN chao')
-%% analyse the recover under R=0.1
+%% analyse the recover under R=0.03
 load('E:\研究生\repo\Rrecuurence-matrix-eigenface\data\approach1\R0.1.mat')
 figure(3)
 subplot(3,2,1)
-para=mean(paraRQAPerio,3);
+para=mean(paraRQAPerio3,3);
 relaErr=zeros(12,5);
 for i=1:12
     relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
@@ -246,7 +246,7 @@ plot([1:12],relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
 legend('DET','ENTR','L','ENTRV')
 title('RQA PErio')
 subplot(3,2,2)
-para=mean(paraCNPerio,3);
+para=mean(paraCNPerio3,3);
 relaErr=zeros(12,5);
 for i=1:12
     relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
@@ -267,7 +267,7 @@ plot([1:12],relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
 legend('MATCHINGINDEX','TRANSIVITY','GLOBALEFFICIENCY','MEANCLUSTER')
 title('CN PErio')
 subplot(3,2,3)
-para=mean(paraRQAQuasi,3);
+para=mean(paraRQAQuasi3,3);
 relaErr=zeros(12,5);
 for i=1:12
     relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
@@ -288,7 +288,7 @@ plot([1:12],relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
 legend('DET','ENTR','L','ENTRV')
 title('RQA quasiPErio')
 subplot(3,2,4)
-para=mean(paraCNQuasi,3);
+para=mean(paraCNQuasi3,3);
 relaErr=zeros(12,5);
 for i=1:12
     relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
@@ -309,7 +309,7 @@ plot([1:12],relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
 legend('MATCHINGINDEX','TRANSIVITY','GLOBALEFFICIENCY','MEANCLUSTER')
 title('CN quasiperio')
 subplot(3,2,5)
-para=mean(paraRQAChao,3);
+para=mean(paraRQAChao3,3);
 relaErr=zeros(12,5);
 for i=1:12
     relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
@@ -330,7 +330,7 @@ plot([1:12],relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
 legend('DET','ENTR','L','DETV','ENTRV')
 title('RQA chao')
 subplot(3,2,6)
-para=mean(paraCNChao,3);
+para=mean(paraCNChao3,3);
 relaErr=zeros(12,5);
 for i=1:12
     relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
@@ -350,7 +350,7 @@ hold on
 plot([1:12],relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
 legend('MATCHINGINDEX','TRANSIVITY','GLOBALEFFICIENCY','MEANCLUSTER')
 title('CN chao')
-%%  lineral regression under RR=0.1
+%%  lineral regression under RR=0.05
 res=1-[chaocumsum(1:12);chaocumsum(1:12);quasiperiocumsum(1:12)...
     ;quasiperiocumsum(1:12);periocumsum(1:12);periocumsum(1:12)];
 figure(4)
@@ -480,5 +480,367 @@ hold on
 plot(res(2,:),relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
 legend('MATCHINGINDEX','TRANSIVITY','GLOBALEFFICIENCY','MEANCLUSTER')
 title('CN chao')
+%%  lineral regression under RR=0.03
+res=1-[chaocumsum(1:12);chaocumsum(1:12);quasiperiocumsum(1:12)...
+    ;quasiperiocumsum(1:12);periocumsum(1:12);periocumsum(1:12)];
+figure(5)
+subplot(3,2,1)
+para=mean(paraRQAPerio3,3);
+relaErr=zeros(12,5);
+for i=1:12
+    relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
+end
+ref=relaErr(1,:);
+for i=1:12
+    relaErr(i,:)=relaErr(i,:)./ref;
+end
+plot(res(6,:),relaErr(:,1),'Color',[1,0,0],'LineStyle','--')
+hold on
+plot(res(6,:),relaErr(:,2),'Color',[0,1,0],'LineStyle','--')
+hold on
+plot(res(6,:),relaErr(:,3),'Color',[0,0,1],'LineStyle','--')
+hold on
+% plot([1:12],relaErr(:,4),'Color',[0.5,0.5,0.5],'LineStyle','--')
+% hold on
+plot(res(6,:),relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
+legend('DET','ENTR','L','ENTRV')
+title('RQA PErio')
+subplot(3,2,2)
+para=mean(paraCNPerio3,3);
+relaErr=zeros(12,5);
+for i=1:12
+    relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
+end
+ref=relaErr(1,:);
+for i=1:12
+    relaErr(i,:)=relaErr(i,:)./ref;
+end
+plot(res(6,:),relaErr(:,1),'Color',[1,0,0],'LineStyle','--')
+hold on
+plot(res(6,:),relaErr(:,2),'Color',[0,1,0],'LineStyle','--')
+hold on
+plot(res(6,:),relaErr(:,3),'Color',[0,0,1],'LineStyle','--')
+hold on
+plot(res(6,:),relaErr(:,4),'Color',[0.5,0.5,0.5],'LineStyle','--')
+hold on
+plot(res(6,:),relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
+legend('MATCHINGINDEX','TRANSIVITY','GLOBALEFFICIENCY','MEANCLUSTER')
+title('CN PErio')
+subplot(3,2,3)
+para=mean(paraRQAQuasi3,3);
+relaErr=zeros(12,5);
+for i=1:12
+    relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
+end
+ref=relaErr(1,:);
+for i=1:12
+    relaErr(i,:)=relaErr(i,:)./ref;
+end
+plot(res(4,:),relaErr(:,1),'Color',[1,0,0],'LineStyle','--')
+hold on
+plot(res(4,:),relaErr(:,2),'Color',[0,1,0],'LineStyle','--')
+hold on
+plot(res(4,:),relaErr(:,3),'Color',[0,0,1],'LineStyle','--')
+hold on
+% plot([1:12],relaErr(:,4),'Color',[0.5,0.5,0.5],'LineStyle','--')
+% hold on
+plot(res(4,:),relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
+legend('DET','ENTR','L','ENTRV')
+title('RQA quasiPErio')
+subplot(3,2,4)
+para=mean(paraCNQuasi3,3);
+relaErr=zeros(12,5);
+for i=1:12
+    relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
+end
+ref=relaErr(1,:);
+for i=1:12
+    relaErr(i,:)=relaErr(i,:)./ref;
+end
+plot(res(4,:),relaErr(:,1),'Color',[1,0,0],'LineStyle','--')
+hold on
+plot(res(4,:),relaErr(:,2),'Color',[0,1,0],'LineStyle','--')
+hold on
+plot(res(4,:),relaErr(:,3),'Color',[0,0,1],'LineStyle','--')
+hold on
+plot(res(4,:),relaErr(:,4),'Color',[0.5,0.5,0.5],'LineStyle','--')
+hold on
+plot(res(4,:),relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
+legend('MATCHINGINDEX','TRANSIVITY','GLOBALEFFICIENCY','MEANCLUSTER')
+title('CN quasiperio')
+subplot(3,2,5)
+para=mean(paraRQAChao3,3);
+relaErr=zeros(12,5);
+for i=1:12
+    relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
+end
+ref=relaErr(1,:);
+for i=1:12
+    relaErr(i,:)=relaErr(i,:)./ref;
+end
+plot(res(2,:),relaErr(:,1),'Color',[1,0,0],'LineStyle','--')
+hold on
+plot(res(2,:),relaErr(:,2),'Color',[0,1,0],'LineStyle','--')
+hold on
+plot(res(2,:),relaErr(:,3),'Color',[0,0,1],'LineStyle','--')
+hold on
+plot(res(2,:),relaErr(:,4),'Color',[0.5,0.5,0.5],'LineStyle','--')
+hold on
+plot(res(2,:),relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
+legend('DET','ENTR','L','DETV','ENTRV')
+title('RQA chao')
+subplot(3,2,6)
+para=mean(paraCNChao3,3);
+relaErr=zeros(12,5);
+for i=1:12
+    relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
+end
+ref=relaErr(1,:);
+for i=1:12
+    relaErr(i,:)=relaErr(i,:)./ref;
+end
+plot(res(2,:),relaErr(:,1),'Color',[1,0,0],'LineStyle','--')
+hold on
+plot(res(2,:),relaErr(:,2),'Color',[0,1,0],'LineStyle','--')
+hold on
+plot(res(2,:),relaErr(:,3),'Color',[0,0,1],'LineStyle','--')
+hold on
+plot(res(2,:),relaErr(:,4),'Color',[0.5,0.5,0.5],'LineStyle','--')
+hold on
+plot(res(2,:),relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
+legend('MATCHINGINDEX','TRANSIVITY','GLOBALEFFICIENCY','MEANCLUSTER')
+title('CN chao')
+%% analyse the RT R=0.03
 
+figure(6)
+meanPerio=mean(paraRTPerio3,3);
+subplot(2,3,1)
+for i=1:12
+    if i~=12
+    plot([1:0.5:250.5],meanPerio(i,1:500),"Color",[rand(),rand(),rand()])
+    hold on
+    else
+    plot([1:0.5:250.5],meanPerio(i,1:500),"Color",[rand(),rand(),rand()],"LineWidth",2)  
+    end
+end
+meanQuasi=mean(paraRTQuasi3,3);
+subplot(2,3,2)
+for i=1:12
+    if i~=12
+    plot([1:0.5:250.5],meanQuasi(i,1:500),"Color",[rand(),rand(),rand()])
+    hold on
+    else
+    plot([1:0.5:250.5],meanQuasi(i,1:500),"Color",[rand(),rand(),rand()],"LineWidth",2) 
+    end
+end
+meanChao=mean(paraRTChao3,3);
+subplot(2,3,3)
+for i=1:12
+    if i~=12
+    plot([1:0.5:250.5],meanChao(i,1:500),"Color",[rand(),rand(),rand()])
+    hold on
+    else
+    plot([1:0.5:250.5],meanChao(i,1:500),"Color",[rand(),rand(),rand()],"LineWidth",2) 
+    end
+end
+subplot(2,3,4)
+x=[1:1:11];
+y=[];
+for i=1:11
+    mid=compute_kl_divergence_eps(meanPerio(i,:),meanPerio(12,:));
+    y=[y,mid];
+end
+scatter(x,y,'red','filled')
+
+hold on
+x=[1:1:11];
+y=[];
+for i=1:11
+    mid=compute_kl_divergence_eps(meanQuasi(i,:),meanQuasi(12,:));
+    y=[y,mid];
+end
+scatter(x,y,'blue','filled')
+
+hold on
+x=[1:1:11];
+y=[];
+for i=1:11
+    mid=compute_kl_divergence_eps(meanChao(i,:),meanChao(12,:));
+    y=[y,mid];
+end
+scatter(x,y,'green','filled')
+
+%% analyse the RT R=0.05
+
+figure(7)
+meanPerio=mean(paraRTPerio,3);
+subplot(2,3,1)
+for i=1:12
+    if i~=12
+    plot([1:0.5:250.5],meanPerio(i,1:500),"Color",[rand(),rand(),rand()])
+    hold on
+    else
+    plot([1:0.5:250.5],meanPerio(i,1:500),"Color",[rand(),rand(),rand()],"LineWidth",2)  
+    end
+end
+meanQuasi=mean(paraRTQuasi,3);
+subplot(2,3,2)
+for i=1:12
+    if i~=12
+    plot([1:0.5:250.5],meanQuasi(i,1:500),"Color",[rand(),rand(),rand()])
+    hold on
+    else
+    plot([1:0.5:250.5],meanQuasi(i,1:500),"Color",[rand(),rand(),rand()],"LineWidth",2) 
+    end
+end
+meanChao=mean(paraRTChao,3);
+subplot(2,3,3)
+for i=1:12
+    if i~=12
+    plot([1:0.5:250.5],meanChao(i,1:500),"Color",[rand(),rand(),rand()])
+    hold on
+    else
+    plot([1:0.5:250.5],meanChao(i,1:500),"Color",[rand(),rand(),rand()],"LineWidth",2) 
+    end
+end
+subplot(2,3,4)
+x=[1:1:11];
+y=[];
+for i=1:11
+    mid=compute_kl_divergence_eps(meanPerio(i,:),meanPerio(12,:));
+    y=[y,mid];
+end
+scatter(x,y,'red','filled')
+
+hold on
+x=[1:1:11];
+y=[];
+for i=1:11
+    mid=compute_kl_divergence_eps(meanQuasi(i,:),meanQuasi(12,:));
+    y=[y,mid];
+end
+scatter(x,y,'blue','filled')
+
+hold on
+x=[1:1:11];
+y=[];
+for i=1:11
+    mid=compute_kl_divergence_eps(meanChao(i,:),meanChao(12,:));
+    y=[y,mid];
+end
+scatter(x,y,'green','filled')
+
+%% analyse the random condition
+%under R=0.03
+meanRandom=mean(DiagRandom,3);
+Randomcumsum=cumsum(meanRandom)/sum(meanRandom);
+res=1-Randomcumsum(1:12);
+figure(8)
+subplot(1,2,1)
+para=mean(paraRQARandom,3);
+relaErr=zeros(12,5);
+for i=1:12
+    relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
+end
+ref=relaErr(1,:);
+for i=1:12
+    relaErr(i,:)=relaErr(i,:)./ref;
+end
+plot([1:12],relaErr(:,1),'Color',[1,0,0],'LineStyle','--')
+hold on
+plot([1:12],relaErr(:,2),'Color',[0,1,0],'LineStyle','--')
+hold on
+plot([1:12],relaErr(:,3),'Color',[0,0,1],'LineStyle','--')
+hold on
+plot([1:12],relaErr(:,4),'Color',[0.5,0.5,0.5],'LineStyle','--')
+hold on
+plot([1:12],relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
+legend('DET','ENTR','L','DETV','ENTRV')
+title('RQA Random')
+subplot(1,2,2)
+para=mean(paraCNRandom,3);
+relaErr=zeros(12,5);
+for i=1:12
+    relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
+end
+ref=relaErr(1,:);
+for i=1:12
+    relaErr(i,:)=relaErr(i,:)./ref;
+end
+plot([1:12],relaErr(:,1),'Color',[1,0,0],'LineStyle','--')
+hold on
+plot([1:12],relaErr(:,2),'Color',[0,1,0],'LineStyle','--')
+hold on
+plot([1:12],relaErr(:,3),'Color',[0,0,1],'LineStyle','--')
+hold on
+plot([1:12],relaErr(:,4),'Color',[0.5,0.5,0.5],'LineStyle','--')
+hold on
+plot([1:12],relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
+legend('MATCHINGINDEX','TRANSIVITY','GLOBALEFFICIENCY','MEANCLUSTER')
+title('CN Random')
+
+
+figure(9)
+subplot(3,2,1)
+para=mean(paraRQARandom,3);
+relaErr=zeros(12,5);
+for i=1:12
+    relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
+end
+ref=relaErr(1,:);
+for i=1:12
+    relaErr(i,:)=relaErr(i,:)./ref;
+end
+plot(res,relaErr(:,1),'Color',[1,0,0],'LineStyle','--')
+hold on
+plot(res,relaErr(:,2),'Color',[0,1,0],'LineStyle','--')
+hold on
+plot(res,relaErr(:,3),'Color',[0,0,1],'LineStyle','--')
+hold on
+% plot([1:12],relaErr(:,4),'Color',[0.5,0.5,0.5],'LineStyle','--')
+% hold on
+plot(res,relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
+legend('DET','ENTR','L','ENTRV')
+title('RQA Random')
+subplot(3,2,2)
+para=mean(paraCNRandom,3);
+relaErr=zeros(12,5);
+for i=1:12
+    relaErr(i,:)=abs(para(i,:)-para(12,:))./para(12,:);
+end
+ref=relaErr(1,:);
+for i=1:12
+    relaErr(i,:)=relaErr(i,:)./ref;
+end
+plot(res,relaErr(:,1),'Color',[1,0,0],'LineStyle','--')
+hold on
+plot(res,relaErr(:,2),'Color',[0,1,0],'LineStyle','--')
+hold on
+plot(res,relaErr(:,3),'Color',[0,0,1],'LineStyle','--')
+hold on
+plot(res,relaErr(:,4),'Color',[0.5,0.5,0.5],'LineStyle','--')
+hold on
+plot(res,relaErr(:,5),'Color',[0.5,0.25,0.75],'LineStyle','--')
+legend('MATCHINGINDEX','TRANSIVITY','GLOBALEFFICIENCY','MEANCLUSTER')
+title('CN Random')
+
+figure(10)
+meanRandom=mean(paraRTRandom,3);
+subplot(1,2,1)
+for i=1:12
+    if i~=12
+    plot([1:0.5:250.5],meanRandom(i,1:500),"Color",[rand(),rand(),rand()])
+    hold on
+    else
+    plot([1:0.5:250.5],meanRandom(i,1:500),"Color",[rand(),rand(),rand()],"LineWidth",2)  
+    end
+end
+subplot(1,2,2)
+x=[1:1:11];
+y=[];
+for i=1:11
+    mid=compute_kl_divergence_eps(meanRandom(i,:),meanRandom(12,:));
+    y=[y,mid];
+end
+scatter(x,y,'red','filled')
 
