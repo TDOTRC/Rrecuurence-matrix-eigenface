@@ -16,10 +16,13 @@ for i=1:Size
     if size(distPlace,1)>=3
         distPlace1=distPlace(2:size(distPlace)-1);
         for j=1:size(distPlace1)
-            time=distPlace1(j);
-            Dist(time)=Dist(time)+1;
+            k=distPlace1(j);
+            Dist(k)=+1;
         end
+    else
+        Dist
     end
+    clear distPlace1
 end
 
 end

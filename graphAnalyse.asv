@@ -731,10 +731,10 @@ meanChao=mean(paraRTChao,3);
 subplot(2,3,3)
 for i=1:12
     if i~=12
-    plot3([1:0.5:400.5],i*ones(1,800),meanChao(i,1:800),"Color",[rand(),rand(),rand()])
+    plot3([1:0.5:250.5],i*ones(1,500),meanChao(i,1:500),"Color",[rand(),rand(),rand()])
     hold on
     else
-    plot3([1:0.5:400.5],i*ones(1,800),meanChao(i,1:800),"Color",[rand(),rand(),rand()],"LineWidth",2)  
+    plot3([1:0.5:250.5],i*ones(1,500),meanChao(i,1:500),"Color",[rand(),rand(),rand()],"LineWidth",2)  
     end
 end
 grid on
@@ -909,11 +909,5 @@ for i=1:11
 end
 scatter(x,y,'red','filled')
 
-%% analyse the peak of RT distribution of Chaosystem
-Time2=23;
-Time1=12;
-plot([1:15001],data4(:,1))
-
-
-
+%% analyse the peak of RT distribution
 

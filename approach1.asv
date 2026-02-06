@@ -25,7 +25,7 @@ for xx=1:epoch
 waitbar(xx/40, h, sprintf('已完成0.05', i));
 %% perio
 fre=0.1+0.4*rand(1);
-y=[cos(fre*2*pi*t)+cos(fre*3*pi*t);sin(fre*2*pi*t)+sin(fre*3*pi*t)];
+y=[cos(fre*2*pi*t);sin(fre*2*pi*t)];
 distM=zeros(Size);
 for i=1:Size
     for j=1:Size
@@ -87,7 +87,7 @@ for j=1:scale
     paraRTPerio(j,:,xx)=f;
 end
 %% quasiperio
-y=[cos(fre*2*pi*t)+0.5*cos(fre*2*3*t);sin(fre*2*pi*t)+0.5*sin(fre*2*3*t)];
+y=[cos(fre*2*pi*t)+0.5*cos(fre*2*5*t);sin(fre*2*pi*t)+0.5*sin(fre*2*5*t)];
 distM=zeros(Size);
 for i=1:Size
     for j=1:Size
